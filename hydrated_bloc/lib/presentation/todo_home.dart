@@ -117,9 +117,15 @@ class TodoList extends StatelessWidget {
                   },
                   child: CheckboxListTile(
                       tileColor: Colors.blueAccent.shade100,
-                      title: Text(state.listOfTodo[index].todoTitle),
+                      title: Text(
+                        state.listOfTodo[index].todoTitle,
+                        style: state.listOfTodo[index].isCompleted
+                            ? const TextStyle(
+                                decoration: TextDecoration.lineThrough)
+                            : null,
+                      ),
                       value: state.listOfTodo[index].isCompleted,
-                      onChanged: (value) {
+                      onChanged: (value) async {
                         context.read<TodoBloc>().add(
                               UpdateTodoState(
                                   value!, state.listOfTodo[index].todoId),
